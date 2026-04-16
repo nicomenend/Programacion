@@ -1,9 +1,3 @@
-/*
-Autores: Nicolas Menendez, Joel Cruz y Suri Arias
-Fecha: 15/04/2026
-Descripcion: 
-*/
-
 #include <stdio.h>
 #include <string.h>
 char nombresucursal[50]; //variable para el nombre de la sucursal
@@ -29,10 +23,15 @@ void PrecioProdu(float precios[3][10], float price, int sucursal, int producto){
 int main() {
     for (int i = 0; i < 3; i++) { //BUCLE PARA TOMAR LOS DATOS DE LAS SUCURSALES
         printf("Indica el nombre de la Sucursal %d", i);
+        fflush(stdin);
         fgets(nombresucursal,50, stdin);
+        nombresucursal[strcspn(nombresucursal, "\n")] = '\0';
         for (int j = 0; j < 4; j++) { // BUCLE PRA TOMAR LOS DATOS DE LOS PRODUCTOS DE LAS SUCURSALES Y LOS PRECIOS DE LOS PRODCUTOS
+            
             printf("Indica el nombre del producto %d para la sucursal %s", j, nombresucursal);
-            fgets(nombreproducto,50,stdin);
+            fflush(stdin);
+            fgets(nombreproducto,50, stdin);
+            nombreproducto[strcspn(nombreproducto, "\n")] = '\0';
             printf("Indica la cantidad de producto disponible de %s ",nombreproducto);
             scanf("%d",&cantidadproducto);
             printf("Indica el precio del producto %s", nombreproducto);
@@ -41,10 +40,11 @@ int main() {
             NombrarSucursal(sucursalproductos,nombresucursal,i,j);
             cantidad(cantidadproductos,cantidadproducto,i,j);
             PrecioProdu(precioproductos,precioproducto,i,j);
+            nombreproducto[0] = '\0'; //esto hace que el valor de esta variable string se limpie por cada iteracion
         }
+        nombresucursal[0] = '\0';
 
     }
-    printf("Try programiz.pro");
 
     return 0;
 }
